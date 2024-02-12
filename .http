@@ -1,0 +1,33 @@
+@baseurl=http://localhost:3000
+
+### Home
+GET {{baseurl}}
+
+###
+
+### Get services
+GET {{baseurl}}/services
+
+###
+
+### Add User
+POST {{baseurl}}/start
+content-type: application/json
+
+{
+    "lastName": "Popov"
+}
+
+###
+
+### Order
+POST {{baseurl}}/Order
+content-type: application/json
+
+{
+    "customerId": "1",
+    "serviceId": "2",
+    "dropOffDate": "2024-02-15"
+}
+
+###
