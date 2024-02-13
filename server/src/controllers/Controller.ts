@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as services from '../services/Service';
-import { displayServices } from '../services/Service'; // Add the displayServices function to the services file
+import { displayServices } from '../services/Service';
 
 export function startApp(req: Request, res: Response): void {
   const { lastName } = req.body;
@@ -11,7 +11,7 @@ export function startApp(req: Request, res: Response): void {
 
 export function getServices(req: Request, res: Response): void {
   const availableServices = displayServices();
-  res.json({ services: availableServices });
+  res.json(availableServices);
 }
 
 export function placeOrder(req: Request, res: Response): void {
