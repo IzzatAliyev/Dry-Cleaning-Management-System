@@ -16,3 +16,15 @@
 Якщо клієнт згоден, він залишає річ (при цьому фіксується послуга, клієнт і дата прийому) і забирає її після обробки (при цьому фіксується дата повернення).
 
 У Вашої хімчистки зʼявилася філія, і Ви хотіли б бачити, в тому числі, облік наданих послуг за філіями. Крім того, ви вирішили робити надбавки за терміновість і складність робіт.
+
+```
+CREATE TABLE `customers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(60) NOT NULL,
+  `lastName` varchar(60) NOT NULL,
+  `isRepeatCustomer` tinyint(1) DEFAULT '0',
+  `discount` int DEFAULT '0',
+  `orderCount` int DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+```
