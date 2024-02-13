@@ -16,6 +16,15 @@ function addCustomer(customer: Customer) : Customer
     return customer;
 }
 
+export function getCustomers() : Customer[]
+{
+    return customers;
+}
+
+export function getServices(): Service[] {
+    return services;
+}
+
 export function checkCustomer(lastName: string): Customer {
     const existingCustomer = customers.find((c) => c.lastName === lastName);
 
@@ -52,8 +61,3 @@ export function placeOrder(customer: Customer, service: Service, dropOffDate: st
 
     return newOrder;
 }
-
-export function displayServices(): Service[] {
-    return services;
-}
-

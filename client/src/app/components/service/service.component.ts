@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Service } from '../../models/Service';
 import { CommonModule } from '@angular/common';
 import { ServiceService } from '../../services/service.service';
-import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-service',
@@ -12,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrl: './service.component.scss'
 })
 export class ServiceComponent implements OnInit {
+  services: Service[] = [];
 
   constructor(private service: ServiceService) { }
 
@@ -25,6 +25,4 @@ export class ServiceComponent implements OnInit {
       }
     });
   }
-
-  services: Service[] = [];
 }

@@ -10,13 +10,19 @@ GET {{baseurl}}/services
 
 ###
 
-### Add User
+### Add Customer
 POST {{baseurl}}/start
 content-type: application/json
 
 {
     "lastName": "Popov"
 }
+
+###
+
+
+### Get Customers
+GET {{baseurl}}/customers
 
 ###
 

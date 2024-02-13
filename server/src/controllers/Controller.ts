@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as services from '../services/Service';
-import { displayServices } from '../services/Service';
+import { getServices as getServicess, getCustomers as getCustomerss } from '../services/Service';
 
 export function startApp(req: Request, res: Response): void {
   const { lastName } = req.body;
@@ -10,8 +10,13 @@ export function startApp(req: Request, res: Response): void {
 }
 
 export function getServices(req: Request, res: Response): void {
-  const availableServices = displayServices();
+  const availableServices = getServicess();
   res.json(availableServices);
+}
+
+export function getCustomers(req: Request, res: Response): void {
+  const allCustomers = getCustomerss();
+  res.json(allCustomers);
 }
 
 export function placeOrder(req: Request, res: Response): void {
