@@ -1,3 +1,4 @@
+import { CustomerRequestDto } from '../dtos/CustomerRequestDto';
 import { Customer, Service, Order } from '../models/index';
 
 // Sample data
@@ -10,14 +11,19 @@ export const services: Service[] = [
     { id: 4, name: 'Laundry', type: 'Express', cost: 12 },
 ];
 
-function addCustomer(customer: Customer) : Customer
-{
-    customers.push(customer);
-    return customer;
+export function addCustomer(customer: CustomerRequestDto): Customer {
+    const { firstName, lastName, surname } = customer;
+    const newCustomer = new Customer(firstName, lastName, surname, false, 0, 0);
+    customers.push(newCustomer);
+    return newCustomer;
 }
 
-export function getCustomers() : Customer[]
-{
+export function findCustomer(lastName: string): Customer {
+    const customer = customers.find(x => x.lastName === lastName);
+    return customer ?? new Customer('', '', '', false, -1, -1);
+}
+
+export function getCustomers(): Customer[] {
     return customers;
 }
 
@@ -35,6 +41,7 @@ export function checkCustomer(lastName: string): Customer {
         const newCustomer: Customer = {
             firstName: '',
             lastName,
+            surname: '',
             isRepeatCustomer: false,
             discount: 0,
             orderCount: 0,

@@ -1,22 +1,41 @@
 import { Request, Response } from 'express';
 import * as services from '../services/Service';
-import { getServices as getServicess, getCustomers as getCustomerss } from '../services/Service';
+import { CustomerRequestDto } from '../dtos/CustomerRequestDto';
+
+export function addCustomer(req: Request, res: Response): void {
+  const customerReq = req.body as CustomerRequestDto;
+  const customer = services.addCustomer(customerReq);
+
+  res.json(customer);
+}
+
+function findCustomer(req: Request, res: Response): void {
+  const lastName = req.query['lastName'] as string;
+  const customer = services.findCustomer(lastName);
+
+  res.json(customer);
+}
 
 export function startApp(req: Request, res: Response): void {
   const { lastName } = req.body;
   const customer = services.checkCustomer(lastName);
 
-  res.json({ customer });
+  res.json(customer);
 }
 
 export function getServices(req: Request, res: Response): void {
-  const availableServices = getServicess();
+  const availableServices = services.getServices();
   res.json(availableServices);
 }
 
 export function getCustomers(req: Request, res: Response): void {
-  const allCustomers = getCustomerss();
-  res.json(allCustomers);
+  if (req.query['lastName']) {
+    findCustomer(req, res)
+  }
+  else {
+    const allCustomers = services.getCustomers();
+    res.json(allCustomers);
+  }
 }
 
 export function placeOrder(req: Request, res: Response): void {
