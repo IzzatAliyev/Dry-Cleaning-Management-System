@@ -1,0 +1,30 @@
+<div class="container">
+  <p>customer register works!</p>
+  <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
+    <div>
+      <label>Имя</label><br>
+      <input name="name" formControlName="userName" />
+
+      @if(myForm.controls["userName"].invalid && myForm.controls["userName"].touched){
+      <div class="alert">Не указано имя</div>
+      }
+    </div>
+    <div>
+      <label>Email</label><br>
+      <input name="email" formControlName="userEmail" />
+
+      @if(myForm.controls["userEmail"].invalid && myForm.controls["userEmail"].touched){
+      <div class="alert">Некорректный email</div>
+      }
+    </div>
+    <div>
+      <label>Телефон</label><br>
+      <input name="phone" formControlName="userPhone" />
+
+      @if(myForm.controls["userPhone"].invalid && myForm.controls["userPhone"].touched){
+      <div class="alert">Некорректный номер телефона</div>
+      }
+    </div>
+    <button [disabled]="myForm.invalid">Отправить </button>
+  </form>
+</div>
