@@ -4,26 +4,43 @@ import { Order, Service } from "../models";
 import * as customerService from "./customerService"
 
 export async function createOrder(order: OrderRequestDto): Promise<string> {
-    const { customerId, serviceId, filialId, receiveDate, returnDate } = order;
-    const newOrder = new Order(customerId, serviceId, filialId, receiveDate, returnDate);
     const conn = await connect();
-    const res = await conn.query(`SELECT services.cost FROM services WHERE id = ?`, [serviceId])
-    const services = res[0] as Service[]
-    const service = services[0];
-    const discountProcent = await customerService.updateCustomer(customerId);
-    const totalCost = calculateOrderSum(service.cost, receiveDate, returnDate);
-    const diff =  totalCost * (discountProcent / 100)
-    const totalSum = totalCost - diff;
-    newOrder.sum = totalSum;
-    await conn.query(`INSERT INTO orders SET ?`, [newOrder])
-    return "Order created";
+    try {
+        const { customerId, serviceId, filialId, receiveDate, returnDate } = order;
+        const newOrder = new Order(customerId, serviceId, filialId, receiveDate, returnDate);
+        const res = await conn.query(`SELECT services.cost FROM services WHERE id = ?`, [serviceId])
+        const services = res[0] as Service[]
+        const service = services[0];
+        const discountProcent = await customerService.updateCustomer(customerId);
+        const totalCost = calculateOrderSum(service.cost, receiveDate, returnDate);
+        const diff = totalCost * (discountProcent / 100)
+        const totalSum = totalCost - diff;
+        newOrder.sum = totalSum;
+        await conn.query(`INSERT INTO orders SET ?`, [newOrder])
+        return "Order created";
+    } catch (err: any) {
+        console.error(err.message)
+        return err.message
+    }
+    finally {
+        await conn.end()
+    }
 }
 
 export async function getOrders(): Promise<Order[]> {
     const conn = await connect();
-    const orders = await conn.query("SELECT * FROM orders");
-    console.log(orders)
-    return orders[0] as Order[];
+    try {
+        const orders = await conn.query("SELECT * FROM orders");
+        console.log(orders)
+        return orders[0] as Order[];
+    }
+    catch (err: any) {
+        console.error(err.message)
+        return []
+    }
+    finally {
+        await conn.end()
+    }
 }
 
 function calculateDateDifference(dateString1: string, dateString2: string): number {
