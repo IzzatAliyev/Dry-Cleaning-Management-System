@@ -14,14 +14,26 @@ GET {{baseurl}}/services
 
 ##### Customer ######
 
-### Add Customer 
+### Start Customer 
 POST {{baseurl}}/start
 content-type: application/json
 
 {
     "firstName": "Kiril",
     "lastName": "Popov",
-    "surname": "Popayev"
+    "surName": "Popayev"
+}
+
+###
+
+### Add Customer 
+POST {{baseurl}}/customers
+content-type: application/json
+
+{
+    "firstName": "Anton",
+    "lastName": "Antonov",
+    "surName": "Opapa"
 }
 
 ###

@@ -17,14 +17,66 @@
 
 У Вашої хімчистки зʼявилася філія, і Ви хотіли б бачити, в тому числі, облік наданих послуг за філіями. Крім того, ви вирішили робити надбавки за терміновість і складність робіт.
 
+### Tables
+**customers**
+
+**serviceType**
+
+**services**
+
+**orders**
+
+**filials**
 ```
-CREATE TABLE `customers` (
+CREATE TABLE `cleaner`.`customers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `firstName` varchar(60) NOT NULL,
   `lastName` varchar(60) NOT NULL,
+  `surName` varchar(60) NOT NULL,
   `isRepeatCustomer` tinyint(1) DEFAULT '0',
   `discount` int DEFAULT '0',
   `orderCount` int DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+);
+```
+
+```
+CREATE TABLE `cleaner`.`serviceType` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+);
+```
+
+```
+CREATE TABLE `cleaner`.`services` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  `typeId` int NOT NULL,
+  `cost` float NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`typeId`) REFERENCES `serviceType`(`id`)
+);
+````
+
+```
+CREATE TABLE `cleaner`.`orders` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `customerId` int NOT NULL,
+  `serviceId` int NOT NULL,
+  `receiveDate` varchar(60) NOT NULL,
+  `returnDate` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`customerId`) REFERENCES `customers`(`id`),
+  FOREIGN KEY (`serviceId`) REFERENCES `services`(`id`)
+);
+```
+
+```
+CREATE TABLE `cleaner`.`filials` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+);
 ```

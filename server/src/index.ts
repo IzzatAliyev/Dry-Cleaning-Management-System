@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 // Define routes
 app.get('/', (req,res) => res.send("<h1>Welcome to the Dry Cleaning Management System</h1>"));
 app.post('/start', controllers.startApp);
+app.post('/customers', controllers.addCustomer);
 app.get('/services', controllers.getServices);
 app.get('/customers', controllers.getCustomers);
 app.post('/order', controllers.placeOrder);
