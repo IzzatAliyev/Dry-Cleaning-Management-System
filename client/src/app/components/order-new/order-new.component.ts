@@ -7,7 +7,7 @@ import { ServiceService } from '../../services/service.service';
 import { Service } from '../../models/Service';
 import { FilialRes } from '../../models/FilialRes';
 import { FilialService } from '../../services/filial.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-new',
@@ -28,7 +28,7 @@ export class OrderNewComponent implements OnInit {
     "returnDate": new FormControl('', Validators.required)
   });
 
-  constructor(private orderService: OrderService, private serviceService: ServiceService, private filialService: FilialService, private activatedRoute: ActivatedRoute) { }
+  constructor(private orderService: OrderService, private serviceService: ServiceService, private filialService: FilialService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.customerId = this.activatedRoute.snapshot.params['id'];
@@ -42,6 +42,7 @@ export class OrderNewComponent implements OnInit {
     this.orderService.addOrder(body).subscribe(
       (response: string) => {
         console.log('Request successful', response);
+        this.router.navigateByUrl('orders')
       },
       (error) => {
         console.error('Error submitting request', error);

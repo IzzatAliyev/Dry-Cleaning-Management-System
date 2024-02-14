@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CustomerService } from '../../services/customer.service';
 import { CustomerReq } from '../../models/CustomerReq';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-register',
@@ -17,14 +18,14 @@ export class CustomerRegisterComponent {
     "lastName": new FormControl("", Validators.required),
     "surName": new FormControl("", Validators.required)
   });
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService, private router: Router) { }
 
   submit() {
-    console.log("hi")
     var body = this.myForm.value as CustomerReq
     this.customerService.addCustomer(body).subscribe(
       (response: string) => {
         console.log('Request successful', response);
+        this.router.navigateByUrl('customers')
       },
       (error) => {
         console.error('Error submitting request', error);
