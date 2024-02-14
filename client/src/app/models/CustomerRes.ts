@@ -1,4 +1,5 @@
-export interface Customer {
+export interface CustomerRes {
+    id: number;
     firstName: string;
     lastName: string;
     surName: string;

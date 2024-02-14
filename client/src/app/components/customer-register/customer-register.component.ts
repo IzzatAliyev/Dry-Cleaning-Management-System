@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
 import { CustomerReq } from '../../models/CustomerReq';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-customer-register',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule],
   templateUrl: './customer-register.component.html',
   styleUrl: './customer-register.component.scss'
 })

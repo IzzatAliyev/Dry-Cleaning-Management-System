@@ -1,9 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Customer } from '../models/Customer';
 import { HttpClient } from '@angular/common/http';
 import { AppConst } from '../app.const';
 import { Observable, catchError, map } from 'rxjs';
 import { CustomerReq } from '../models/CustomerReq';
+import { CustomerRes } from '../models/CustomerRes';
 
 @Injectable({
   providedIn: 'root'
@@ -38,10 +38,9 @@ export class CustomerService{
         throw this.errorDialogService.openDialog(data);
       })
     );
-;
   }
 
-  getCustomers(): Observable<Customer[]> {
-    return this.httpclient.get<Customer[]>(this.apiUrl);
+  getCustomers(): Observable<CustomerRes[]> {
+    return this.httpclient.get<CustomerRes[]>(this.apiUrl);
   }
 }

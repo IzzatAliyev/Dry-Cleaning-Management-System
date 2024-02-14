@@ -1,9 +1,10 @@
-import { Customer } from "./Customer";
+import { CustomerRes } from "./CustomerRes";
 import { FilialRes } from "./FilialRes";
 import { Service } from "./Service";
 
 export interface OrderRes {
-    customer: Customer;
+    id: number;
+    customer: CustomerRes;
     service: Service;
     filial: FilialRes;
     receiveDate: string;
