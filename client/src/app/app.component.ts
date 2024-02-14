@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { ServiceComponent } from './components/service/service.component';
-import { HttpClientModule } from '@angular/common/http';
 import { CustomerRegisterComponent } from './components/customer-register/customer-register.component';
 
 @Component({
