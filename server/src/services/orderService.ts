@@ -1,5 +1,6 @@
 import { connect } from "../db/database";
 import { OrderRequestDto } from "../dtos/OrderRequestDto";
+import { OrderSum } from "../dtos/OrderSum";
 import { Order, Service } from "../models";
 import * as customerService from "./customerService"
 
@@ -37,6 +38,35 @@ export async function getOrders(): Promise<Order[]> {
     catch (err: any) {
         console.error(err.message)
         return []
+    }
+    finally {
+        await conn.end()
+    }
+}
+
+export async function getSum(year: string): Promise<number | undefined> {
+    try {
+        const orders = await getSumAndMonth(year);
+        let sum: number = 0
+        for (let order of orders!) {
+            sum += order.sum
+        }
+
+        return sum
+    } catch (err: any) {
+        console.error(err.message)
+    }
+}
+
+export async function getSumAndMonth(year: string): Promise<OrderSum[] | undefined> {
+    const conn = await connect()
+    try {
+        const res = await conn.query("SELECT sum, CASE WHEN orders.receiveDate like '%-01-%' THEN 1 WHEN orders.receiveDate like '%-02-%' THEN 2 WHEN orders.receiveDate like '%-03-%' THEN 3 WHEN orders.receiveDate like '%-04-%' THEN 4 WHEN orders.receiveDate like '%-05-%' THEN 5 WHEN orders.receiveDate like '%-06-%' THEN 6 WHEN orders.receiveDate like '%-07-%' THEN 7 WHEN orders.receiveDate like '%-08-%' THEN 8 WHEN orders.receiveDate like '%-09-%' THEN 9 WHEN orders.receiveDate like '%-10-%' THEN 10 WHEN orders.receiveDate like '%-11-%' THEN 11 WHEN orders.receiveDate like '%-12-%' THEN 12 ELSE 0 END AS month FROM cleaner.orders WHERE orders.receiveDate LIKE Concat(?, '%')", [year]);
+        const orders = res[0] as OrderSum[];
+
+        return orders
+    } catch (err: any) {
+        console.error(err.message)
     }
     finally {
         await conn.end()

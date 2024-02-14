@@ -7,8 +7,7 @@ export async function connect() {
         user: 'root',
         password: 'rootroot',
         database: 'cleaner',
-        connectionLimit: 10
-        
+        connectionLimit: 10  
     });
 
     return connection;

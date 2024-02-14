@@ -13,6 +13,18 @@ export async function createOrder(req: Request, res: Response): Promise<void> {
     res.json(order);
 }
 
+export async function getSum(req: Request, res: Response): Promise<void> {
+    const year = req.params['year']
+    const sum = await services.getSum(year)
+    res.json(sum)
+}
+
+export async function getSumAndMonth(req: Request, res: Response): Promise<void> {
+    const year = req.params['year']
+    const result = await services.getSumAndMonth(year)
+    res.json(result)
+}
+
 export async function getOrders(req: Request, res: Response): Promise<void> {
     const orders = await services.getOrders();
     const resOrders: OrderResponseDto[] = [];

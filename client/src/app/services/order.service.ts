@@ -4,6 +4,7 @@ import { AppConst } from '../app.const';
 import { OrderRes } from '../models/OrderRes';
 import { Observable, catchError, map } from 'rxjs';
 import { OrderReq } from '../models/OrderReq';
+import { OrderSum } from '../models/OrderSum';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,14 @@ export class OrderService {
 
   getOrders(): Observable<OrderRes[]> {
     return this.httpclient.get<OrderRes[]>(this.apiUrl);
+  }
+
+  getSum(year: string): Observable<number> {
+    return this.httpclient.get<number>(this.apiUrl + `/sum/${year}`);
+  }
+
+  getSumAndMonth(year: string): Observable<OrderSum[]> {
+    return this.httpclient.get<OrderSum[]>(this.apiUrl + `/month/${year}`);
   }
 
   addOrder(orderReq: OrderReq): Observable<string> {

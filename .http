@@ -48,6 +48,16 @@ GET {{orders}}
 
 ###
 
+### Get orders sum
+GET {{orders}}/sum/2022
+
+###
+
+### Get orders sum by month
+GET {{orders}}/month/2022
+
+###
+
 ### Create order
 POST {{orders}}
 content-type: application/json
