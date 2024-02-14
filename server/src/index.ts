@@ -19,6 +19,7 @@ app.post('/customers', controllers.addCustomer);
 app.get('/customers', controllers.getCustomers);
 app.get('/services', controllers.getServices);
 app.post('/orders', controllers.createOrder);
+app.get('/orders', controllers.getOrders);
 app.get('/filials', controllers.getFilials);
 app.get('/serviceTypes', controllers.getServiceTypes);
 

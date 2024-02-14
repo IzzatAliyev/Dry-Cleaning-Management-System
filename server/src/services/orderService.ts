@@ -19,6 +19,13 @@ export async function createOrder(order: OrderRequestDto): Promise<string> {
     return "Order created";
 }
 
+export async function getOrders(): Promise<Order[]> {
+    const conn = await connect();
+    const orders = await conn.query("SELECT * FROM orders");
+    console.log(orders)
+    return orders[0] as Order[];
+}
+
 function calculateDateDifference(dateString1: string, dateString2: string): number {
     const date1 = new Date(dateString1);
     const date2 = new Date(dateString2);

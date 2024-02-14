@@ -43,6 +43,11 @@ GET {{customers}}
 
 ##### Order #####
 
+### Get orders
+GET {{orders}}
+
+###
+
 ### Create order
 POST {{orders}}
 content-type: application/json

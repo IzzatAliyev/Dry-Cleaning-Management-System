@@ -1,0 +1,22 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Customer</th>
+      <th scope="col">Filial</th>
+      <th scope="col">Service</th>
+      <th scope="col">Sum</th>
+      <th scope="col">Receive date</th>
+      <th scope="col">Return date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.customer.lastName + ' ' + order.customer.firstName + ' ' + order.customer.surName }}</td>
+      <td>{{ order.filial.name + ', ' + order.filial.location }}</td>
+      <td>{{ order.service.name }}</td>
+      <td>{{ order.sum }}</td>
+      <td>{{ order.receiveDate }}</td>
+      <td>{{ order.returnDate }}</td>
+    </tr>
+  </tbody>
+</table>
