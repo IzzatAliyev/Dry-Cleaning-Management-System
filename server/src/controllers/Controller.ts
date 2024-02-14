@@ -2,12 +2,13 @@ import { Request, Response } from 'express';
 import * as services from '../services/Service';
 export *  from './customerController';
 export * from './serviceController'
+export * from './orderController'
 
 export function startApp(req: Request, res: Response): void {
-  const { lastName } = req.body;
-  const customer = services.checkCustomer(lastName);
+  // const { lastName } = req.body;
+  // const customer = services.checkCustomer(lastName);
 
-  res.json(customer);
+  // res.json(customer);
 }
 
 export function placeOrder(req: Request, res: Response): void {

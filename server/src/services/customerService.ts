@@ -8,7 +8,7 @@ export async function addCustomer(customer: CustomerRequestDto): Promise<string>
     const newCustomer = new Customer(firstName, lastName, surName, false, 0, 0);
     const conn = await connect();
     await conn.query(`INSERT INTO customers SET ?`, [newCustomer])
-    return "Post created";
+    return "Customer created";
 }
 
 export async function findCustomer(lastName: string): Promise<Customer> {
@@ -27,7 +27,7 @@ export async function getCustomers(): Promise<Customer[]> {
 }
 
 
-export function checkCustomer(lastName: string): Customer {
+function checkCustomer(lastName: string): Customer {
     const existingCustomer = customers.find((c) => c.lastName === lastName);
 
     if (existingCustomer) {

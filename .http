@@ -48,14 +48,16 @@ GET {{baseurl}}/customers
 
 ###
 
-### Order
-POST {{baseurl}}/Order
+### Create Order
+POST {{baseurl}}/orders
 content-type: application/json
 
 {
     "customerId": "1",
     "serviceId": "2",
-    "dropOffDate": "2024-02-15"
+    "filialId": "3",
+    "receiveDate": "2024-02-20",
+    "returnDate": "2024-03-24"
 }
 
 ###

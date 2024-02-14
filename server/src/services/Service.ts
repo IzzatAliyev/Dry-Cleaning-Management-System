@@ -2,6 +2,7 @@ import { Customer, Service, Order } from '../models/index';
 export * from './customerService';
 export * from './serviceService';
 export * from './serviceTypeService';
+export * from './orderService'
 
 // Sample data
 export const orders: Order[] = [];

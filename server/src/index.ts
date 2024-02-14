@@ -19,7 +19,7 @@ app.post('/start', controllers.startApp);
 app.post('/customers', controllers.addCustomer);
 app.get('/services', controllers.getServices);
 app.get('/customers', controllers.getCustomers);
-app.post('/order', controllers.placeOrder);
+app.post('/orders', controllers.createOrder);
 
 
 app.listen(port, () => {
