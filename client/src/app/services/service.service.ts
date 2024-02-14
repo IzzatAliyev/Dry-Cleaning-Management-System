@@ -8,11 +8,11 @@ import { AppConst } from '../app.const';
   providedIn: 'root'
 })
 export class ServiceService {
-  apiUrl: string = AppConst.baseUrl;
+  apiUrl: string = AppConst.servicesUrl;
 
   constructor(private httpclient: HttpClient) { }
 
   getServices(): Observable<Service[]> {
-    return this.httpclient.get<Service[]>(this.apiUrl + "/services");
+    return this.httpclient.get<Service[]>(this.apiUrl);
   }
 }

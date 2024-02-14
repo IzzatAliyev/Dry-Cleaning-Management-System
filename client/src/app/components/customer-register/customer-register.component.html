@@ -1,28 +1,27 @@
 <div class="container">
-  <p>customer register works!</p>
   <form [formGroup]="myForm" novalidate (ngSubmit)="submit()">
     <div>
-      <label>Имя</label><br>
-      <input name="name" formControlName="userName" />
+      <label>Firstname</label><br>
+      <input name="name" formControlName="firstName" />
 
-      @if(myForm.controls["userName"].invalid && myForm.controls["userName"].touched){
+      @if(myForm.controls["firstName"].invalid && myForm.controls["firstName"].touched){
       <div class="alert">Не указано имя</div>
       }
     </div>
     <div>
-      <label>Email</label><br>
-      <input name="email" formControlName="userEmail" />
+      <label>Lastname</label><br>
+      <input name="name" formControlName="lastName" />
 
-      @if(myForm.controls["userEmail"].invalid && myForm.controls["userEmail"].touched){
-      <div class="alert">Некорректный email</div>
+      @if(myForm.controls["lastName"].invalid && myForm.controls["lastName"].touched){
+      <div class="alert">Не указано имя</div>
       }
     </div>
     <div>
-      <label>Телефон</label><br>
-      <input name="phone" formControlName="userPhone" />
+      <label>Surname</label><br>
+      <input name="name" formControlName="surName" />
 
-      @if(myForm.controls["userPhone"].invalid && myForm.controls["userPhone"].touched){
-      <div class="alert">Некорректный номер телефона</div>
+      @if(myForm.controls["surName"].invalid && myForm.controls["surName"].touched){
+      <div class="alert">Не указано имя</div>
       }
     </div>
     <button [disabled]="myForm.invalid">Отправить </button>

@@ -57,7 +57,6 @@ CREATE TABLE `cleaner`.`customers` (
   `lastName` varchar(60) NOT NULL,
   `surName` varchar(60) NOT NULL,
   `isRepeatCustomer` tinyint(1) DEFAULT '0',
-  `discount` int DEFAULT '0',
   `orderCount` int DEFAULT '0',
   PRIMARY KEY (`id`)
 );

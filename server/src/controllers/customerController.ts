@@ -5,6 +5,7 @@ import { CustomerResponseDto } from '../dtos/CustomerResponseDto';
 
 export async function addCustomer(req: Request, res: Response): Promise<void> {
     const customerReq = req.body as CustomerRequestDto;
+    console.log(customerReq)
     const customer = await services.addCustomer(customerReq);
 
     res.json(customer);

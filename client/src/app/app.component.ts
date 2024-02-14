@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { ServiceComponent } from './components/service/service.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomerRegisterComponent } from './components/customer-register/customer-register.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [HomeComponent, ServiceComponent, CommonModule, RouterOutlet, FormsModule ],
+  imports: [HomeComponent, ServiceComponent, CustomerRegisterComponent, CommonModule, RouterOutlet, FormsModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

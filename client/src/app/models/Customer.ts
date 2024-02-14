@@ -1,7 +1,7 @@
 export interface Customer {
     firstName: string;
     lastName: string;
+    surName: string;
     isRepeatCustomer: boolean;
-    discount: number;
     orderCount: number;
 }

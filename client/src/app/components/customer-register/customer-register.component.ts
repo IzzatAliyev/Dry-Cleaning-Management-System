@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CustomerService } from '../../services/customer.service';
+import { CustomerReq } from '../../models/CustomerReq';
 
 @Component({
   selector: 'app-customer-register',
@@ -10,19 +12,18 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class CustomerRegisterComponent {
   myForm: FormGroup;
-  constructor() {
+  constructor(private customerService: CustomerService) {
     this.myForm = new FormGroup({
 
-      "userName": new FormControl("Tom", Validators.required),
-      "userEmail": new FormControl("", [
-        Validators.required,
-        Validators.email
-      ]),
-      "userPhone": new FormControl("", Validators.pattern("[0-9]{11}"))
+      "firstName": new FormControl("", Validators.required),
+      "lastName": new FormControl("", Validators.required),
+      "surName": new FormControl("", Validators.required)
     });
   }
 
   submit() {
-    console.log(this.myForm);
+    console.log("hi")
+    var body = this.myForm.value as CustomerReq
+    this.customerService.addCustomer(body);
   }
 }
