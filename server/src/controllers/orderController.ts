@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as services from '../services/Service';
+import * as services from '../services/index';
 import { OrderRequestDto } from '../dtos/OrderRequestDto';
 
 export async function createOrder(req: Request, res: Response): Promise<void> {

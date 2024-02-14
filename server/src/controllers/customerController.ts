@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as services from '../services/Service';
+import * as services from '../services/index';
 import { CustomerRequestDto } from '../dtos/CustomerRequestDto';
 import { CustomerResponseDto } from '../dtos/CustomerResponseDto';
 

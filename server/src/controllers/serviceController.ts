@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as services from '../services/Service';
+import * as services from '../services/index';
 import { ServiceResponseDto } from '../dtos/ServiceResponseDto';
 
 export async function getServices(req: Request, res: Response): Promise<void> {

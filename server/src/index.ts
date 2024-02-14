@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
 import * as bodyParser from 'body-parser';
-import * as controllers from './controllers/Controller';
+import * as controllers from './controllers/index';
 import cors from "cors";
 
 dotenv.config();
@@ -15,11 +15,11 @@ app.use(bodyParser.json());
 
 // Define routes
 app.get('/', (req,res) => res.send("<h1>Welcome to the Dry Cleaning Management System</h1>"));
-app.post('/start', controllers.startApp);
 app.post('/customers', controllers.addCustomer);
-app.get('/services', controllers.getServices);
 app.get('/customers', controllers.getCustomers);
+app.get('/services', controllers.getServices);
 app.post('/orders', controllers.createOrder);
+app.get('/filials', controllers.getFilials);
 
 
 app.listen(port, () => {

@@ -53,11 +53,16 @@ POST {{baseurl}}/orders
 content-type: application/json
 
 {
-    "customerId": "1",
+    "customerId": "2",
     "serviceId": "2",
     "filialId": "3",
     "receiveDate": "2024-02-20",
     "returnDate": "2024-03-24"
 }
+
+###
+
+### Get Filials
+GET {{baseurl}}/filials
 
 ###

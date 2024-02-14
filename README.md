@@ -37,7 +37,7 @@ adding orders to filials.
 
 Крім того, ви вирішили робити надбавки за терміновість і складність робіт.
 ```
-make additional paymament for urgency and complexty of work
+make additional payment for urgency and complexity of work
 ```
 
 ### Tables

@@ -1,6 +1,7 @@
 import { connect } from "../db/database";
 import { OrderRequestDto } from "../dtos/OrderRequestDto";
 import { Order, Service } from "../models";
+import * as customerService from "./customerService"
 
 export async function createOrder(order: OrderRequestDto): Promise<string> {
     const { customerId, serviceId, filialId, receiveDate, returnDate } = order;
@@ -9,8 +10,11 @@ export async function createOrder(order: OrderRequestDto): Promise<string> {
     const res = await conn.query(`SELECT services.cost FROM services WHERE id = ?`, [serviceId])
     const services = res[0] as Service[]
     const service = services[0];
+    const discountProcent = await customerService.updateCustomer(customerId);
     const totalCost = calculateOrderSum(service.cost, receiveDate, returnDate);
-    newOrder.sum = totalCost;
+    const diff =  totalCost * (discountProcent / 100)
+    const totalSum = totalCost - diff;
+    newOrder.sum = totalSum;
     await conn.query(`INSERT INTO orders SET ?`, [newOrder])
     return "Order created";
 }

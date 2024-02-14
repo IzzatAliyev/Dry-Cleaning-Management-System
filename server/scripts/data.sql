@@ -11,12 +11,12 @@ INSERT INTO `cleaner`.`serviceType` (name) VALUES
 ('Alterations'),
 ('Pressing');
 
-INSERT INTO `cleaner`.`customers` (firstName, lastName, surName, isRepeatCustomer, discount, orderCount) VALUES
-('John', 'Doe', 'Sr.', 1, 3, 3),
-('Alice', 'Smith', 'Jr.', 0, 0, 0),
-('Bob', 'Johnson', 'III', 0, 0, 2),
-('Emily', 'Williams', ' ', 0, 0, 0),
-('David', 'Jones', ' ', 1, 9, 5);
+INSERT INTO `cleaner`.`customers` (firstName, lastName, surName, isRepeatCustomer, orderCount) VALUES
+('John', 'Doe', 'Sr.', 0, 1),
+('Alice', 'Smith', 'Jr.', 0, 1),
+('Bob', 'Johnson', 'III', 0, 1),
+('Emily', 'Williams', ' ', 0, 1),
+('David', 'Jones', ' ', 0, 1);
 
 INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
 ('Suit Dry Cleaning', 1, 25.99),

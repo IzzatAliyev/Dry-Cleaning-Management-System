@@ -3,8 +3,7 @@ export class Customer {
         public firstName: string, 
         public lastName: string, 
         public surName: string, 
-        public isRepeatCustomer: boolean, 
-        public discount: number, 
+        public isRepeatCustomer: boolean,
         public orderCount: number, 
         public id?: number) {}
 }
