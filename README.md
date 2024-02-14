@@ -6,16 +6,39 @@
 Ваша хімчистка здійснює прийом у населення речей для виведення плям. 
 
 Для наведення порядку Ви, по мірі можливості, складаєте базу даних клієнтів, запамʼятовуючи їх анкетні дані (прізвище, імʼя, по батькові). 
+```
+register customer
+```
 
 Починаючи з 3-го звернення, клієнт переходить у категорію постійних клієнтів і отримує знижку в 3% при чищенні кожної наступної речі. 
+```
+after 3 orders will be updated customer as regular and each time will be plusing discount of 3%
+```
 
 Всі послуги, що надаються Вами, поділяються на види, що мають назву, тип і вартість, яка залежить від складності робіт. 
+```
+service have type and price
+```
 
 Робота з клієнтом спочатку полягає у визначенні обсягу робіт, виду послуги і, відповідно, її вартості. 
+```
+by adding the new order 
+```
 
 Якщо клієнт згоден, він залишає річ (при цьому фіксується послуга, клієнт і дата прийому) і забирає її після обробки (при цьому фіксується дата повернення).
+```
 
-У Вашої хімчистки зʼявилася філія, і Ви хотіли б бачити, в тому числі, облік наданих послуг за філіями. Крім того, ви вирішили робити надбавки за терміновість і складність робіт.
+```
+
+У Вашої хімчистки зʼявилася філія, і Ви хотіли б бачити, в тому числі, облік наданих послуг за філіями. 
+```
+adding orders to filials.
+```
+
+Крім того, ви вирішили робити надбавки за терміновість і складність робіт.
+```
+make additional paymament for urgency and complexty of work
+```
 
 ### Tables
 **customers**
@@ -57,19 +80,6 @@ CREATE TABLE `cleaner`.`services` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`typeId`) REFERENCES `serviceType`(`id`)
 );
-````
-
-```
-CREATE TABLE `cleaner`.`orders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `customerId` int NOT NULL,
-  `serviceId` int NOT NULL,
-  `receiveDate` varchar(60) NOT NULL,
-  `returnDate` varchar(60) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`customerId`) REFERENCES `customers`(`id`),
-  FOREIGN KEY (`serviceId`) REFERENCES `services`(`id`)
-);
 ```
 
 ```
@@ -78,5 +88,21 @@ CREATE TABLE `cleaner`.`filials` (
   `name` varchar(100) NOT NULL,
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
+);
+```
+
+```
+CREATE TABLE `cleaner`.`orders` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `customerId` int NOT NULL,
+  `serviceId` int NOT NULL,
+  `filialId` int NOT NULL,
+  `sum` float NOT NULL,
+  `receiveDate` varchar(60) NOT NULL,
+  `returnDate` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`customerId`) REFERENCES `customers`(`id`),
+  FOREIGN KEY (`serviceId`) REFERENCES `services`(`id`),
+  FOREIGN KEY (`filialId`) REFERENCES `filials`(`id`)
 );
 ```

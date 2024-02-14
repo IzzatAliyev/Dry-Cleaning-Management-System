@@ -34,20 +34,23 @@ CREATE TABLE `cleaner`.`services` (
   FOREIGN KEY (`typeId`) REFERENCES `serviceType`(`id`)
 );
 
-CREATE TABLE `cleaner`.`orders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `customerId` int NOT NULL,
-  `serviceId` int NOT NULL,
-  `receiveDate` varchar(60) NOT NULL,
-  `returnDate` varchar(60) NOT NULL,
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`customerId`) REFERENCES `customers`(`id`),
-  FOREIGN KEY (`serviceId`) REFERENCES `services`(`id`)
-);
-
 CREATE TABLE `cleaner`.`filials` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `location` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `cleaner`.`orders` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `customerId` int NOT NULL,
+  `serviceId` int NOT NULL,
+  `filialId` int NOT NULL,
+  `sum` float NOT NULL,
+  `receiveDate` varchar(60) NOT NULL,
+  `returnDate` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`customerId`) REFERENCES `customers`(`id`),
+  FOREIGN KEY (`serviceId`) REFERENCES `services`(`id`),
+  FOREIGN KEY (`filialId`) REFERENCES `filials`(`id`)
 );

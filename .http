@@ -39,7 +39,7 @@ content-type: application/json
 ###
 
 ### Find Customer 
-GET {{baseurl}}/customers?lastName=Popov
+GET {{baseurl}}/customers?lastName=Doe
 
 ###
 

@@ -25,9 +25,9 @@ INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
 ('Shirt Pressing', 4, 5.99),
 ('Coat Dry Cleaning', 1, 35.99);
 
-INSERT INTO `cleaner`.`orders` (customerId, serviceId, receiveDate, returnDate) VALUES
-(1, 1, '2024-02-15', '2024-02-20'),
-(2, 3, '2024-02-16', '2024-02-18'),
-(3, 2, '2024-02-17', '2024-02-22'),
-(4, 4, '2024-02-18', '2024-02-21'),
-(5, 5, '2024-02-19', '2024-02-24');
+INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDate, returnDate) VALUES
+(1, 1, 2, 50.20, '2024-02-15', '2024-02-20'),
+(2, 3, 3, 60.30, '2024-02-16', '2024-02-18'),
+(3, 2, 5, 39.50, '2024-02-17', '2024-02-22'),
+(4, 4, 1, 42.99, '2024-02-18', '2024-02-21'),
+(5, 5, 4, 65.30, '2024-02-19', '2024-02-24');
