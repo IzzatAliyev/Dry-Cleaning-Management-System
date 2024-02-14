@@ -1,4 +1,9 @@
 @baseurl=http://localhost:3000
+@orders={{baseurl}}/orders
+@customers={{baseurl}}/customers
+@services={{baseurl}}/services
+@filials={{baseurl}}/filials
+@serviceTypes={{baseurl}}/serviceTypes
 
 ### Home
 GET {{baseurl}}
@@ -8,26 +13,14 @@ GET {{baseurl}}
 ##### Service ######
 
 ### Get services
-GET {{baseurl}}/services
+GET {{services}}
 
 ###
 
 ##### Customer ######
 
-### Start Customer 
-POST {{baseurl}}/start
-content-type: application/json
-
-{
-    "firstName": "Kiril",
-    "lastName": "Popov",
-    "surName": "Popayev"
-}
-
-###
-
 ### Add Customer 
-POST {{baseurl}}/customers
+POST {{customers}}
 content-type: application/json
 
 {
@@ -39,17 +32,19 @@ content-type: application/json
 ###
 
 ### Find Customer 
-GET {{baseurl}}/customers?lastName=Doe
+GET {{customers}}?lastName=Doe
 
 ###
 
 ### Get Customers
-GET {{baseurl}}/customers
+GET {{customers}}
 
 ###
 
-### Create Order
-POST {{baseurl}}/orders
+##### Order #####
+
+### Create order
+POST {{orders}}
 content-type: application/json
 
 {
@@ -62,7 +57,16 @@ content-type: application/json
 
 ###
 
+##### Filial #####
+
 ### Get Filials
-GET {{baseurl}}/filials
+GET {{filials}}
+
+###
+
+##### Service type #####
+
+### Get service types
+GET {{serviceTypes}}
 
 ###

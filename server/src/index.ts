@@ -20,6 +20,7 @@ app.get('/customers', controllers.getCustomers);
 app.get('/services', controllers.getServices);
 app.post('/orders', controllers.createOrder);
 app.get('/filials', controllers.getFilials);
+app.get('/serviceTypes', controllers.getServiceTypes);
 
 
 app.listen(port, () => {
