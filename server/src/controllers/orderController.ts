@@ -39,8 +39,27 @@ export async function getOrders(req: Request, res: Response): Promise<void> {
         resOrder.customer = customerRes;
         resOrder.service = serviceRes;
         resOrder.filial = filialRes;
+        resOrder.difficulty = getName(order.difficulty)
+        resOrder.urgency = getName(order.urgency)
         resOrders.push(resOrder)
     }
 
     res.json(resOrders);
+}
+
+function getName(numValue: number): string {
+    switch (numValue) {
+        case 1:
+            return "Низький";
+        case 2:
+            return "Середньо-низький";
+        case 3:
+            return "Середній";
+        case 4:
+            return "Середньо-високий";
+        case 5:
+            return "Високий";
+        default:
+            return "Невідомо";
+    }
 }

@@ -7,15 +7,17 @@ import * as customerService from "./customerService"
 export async function createOrder(order: OrderRequestDto): Promise<string> {
     const conn = await connect();
     try {
-        const { customerId, serviceId, filialId, receiveDate, returnDate } = order;
-        const newOrder = new Order(customerId, serviceId, filialId, receiveDate, returnDate);
+        const { customerId, serviceId, filialId, urgency, difficulty, receiveDate, returnDate } = order;
+        const newOrder = new Order(customerId, serviceId, filialId, urgency, difficulty, receiveDate, returnDate);
         const res = await conn.query(`SELECT services.cost FROM services WHERE id = ?`, [serviceId])
         const services = res[0] as Service[]
         const service = services[0];
         const discountProcent = await customerService.updateCustomer(customerId);
-        const totalCost = calculateOrderSum(service.cost, receiveDate, returnDate);
-        const diff = totalCost * (discountProcent / 100)
-        const totalSum = totalCost - diff;
+        const sumdiff = checkDifficulty(difficulty, service.cost); 
+        const sumUrgAndDiff = checkUrgency(urgency, sumdiff); 
+        newOrder.sbd = sumUrgAndDiff;
+        const diff = sumUrgAndDiff * (discountProcent / 100)
+        const totalSum = sumUrgAndDiff - diff;
         newOrder.sum = totalSum;
         await conn.query(`INSERT INTO orders SET ?`, [newOrder])
         return "Order created";
@@ -31,7 +33,7 @@ export async function createOrder(order: OrderRequestDto): Promise<string> {
 export async function getOrders(): Promise<Order[]> {
     const conn = await connect();
     try {
-        const orders = await conn.query("SELECT * FROM orders");
+        const orders = await conn.query("SELECT * FROM orders ORDER BY receiveDate DESC");
         console.log(orders)
         return orders[0] as Order[];
     }
@@ -73,6 +75,56 @@ export async function getSumAndMonth(year: string): Promise<OrderSum[] | undefin
     }
 }
 
+function checkDifficulty(difficulty: number, sum: number): number {
+    switch (difficulty) {
+        case 1:
+            sum += 0;
+            break;
+        case 2:
+            sum += 2;
+            break;
+        case 3:
+            sum += 4;
+            break;
+        case 4:
+            sum += 6;
+            break;
+        case 5:
+            sum += 8;
+            break;
+        default:
+            sum += 0;
+            break;
+    }
+
+    return sum;
+}
+
+function checkUrgency(urgency: number, sum: number): number {
+    switch (urgency) {
+        case 1:
+            sum += 0;
+            break;
+        case 2:
+            sum += 4;
+            break;
+        case 3:
+            sum += 6;
+            break;
+        case 4:
+            sum += 6;
+            break;
+        case 5:
+            sum += 8;
+            break;
+        default:
+            sum += 10;
+            break;
+    }
+
+    return sum;
+}
+
 function calculateDateDifference(dateString1: string, dateString2: string): number {
     const date1 = new Date(dateString1);
     const date2 = new Date(dateString2);
@@ -82,22 +134,4 @@ function calculateDateDifference(dateString1: string, dateString2: string): numb
     const differenceInDays = differenceInMilliseconds / (1000 * 3600 * 24);
 
     return differenceInDays;
-}
-
-function calculateOrderSum(baseCost: number, receiveDate: string, returnDate: string): number {
-    const differenceInDays = calculateDateDifference(receiveDate, returnDate);
-
-    let additionalCost = 0;
-
-    if (differenceInDays <= 7) {
-        additionalCost = 20;
-    } else if (differenceInDays > 7 && differenceInDays <= 14) {
-        additionalCost = 15;
-    } else if (differenceInDays > 14 && differenceInDays >= 30) {
-        additionalCost = 5;
-    }
-
-    const totalCost = baseCost + additionalCost;
-
-    return totalCost;
 }

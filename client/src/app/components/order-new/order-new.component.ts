@@ -9,6 +9,7 @@ import { FilialRes } from '../../models/FilialRes';
 import { FilialService } from '../../services/filial.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { OrderDiffAndUrg } from '../../models/OrderDiffAndUrg';
 
 @Component({
   selector: 'app-order-new',
@@ -21,10 +22,18 @@ export class OrderNewComponent implements OnInit {
   customerId: number = 0;
   services: Service[] = []
   filials: FilialRes[] = []
+  difficultyOrUrgency: OrderDiffAndUrg[] = [
+    new OrderDiffAndUrg(1, 'Низький'),
+    new OrderDiffAndUrg(2, 'Середньо-низький'),
+    new OrderDiffAndUrg(3, 'Середній'),
+    new OrderDiffAndUrg(4, 'Середньо-високий'),
+    new OrderDiffAndUrg(5, 'Високий')]
   myForm = new FormGroup({
     "customerId": new FormControl(this.customerId, [Validators.required, Validators.pattern(/^\d+$/)]),
     "serviceId": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
     "filialId": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+    "urgency": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+    "difficulty": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
     "receiveDate": new FormControl('', Validators.required),
     "returnDate": new FormControl('', Validators.required)
   });
