@@ -33,7 +33,7 @@ export async function createOrder(order: OrderRequestDto): Promise<string> {
 export async function getOrders(): Promise<Order[]> {
     const conn = await connect();
     try {
-        const orders = await conn.query("SELECT * FROM orders");
+        const orders = await conn.query("SELECT * FROM orders ORDER BY receiveDate DESC");
         console.log(orders)
         return orders[0] as Order[];
     }
