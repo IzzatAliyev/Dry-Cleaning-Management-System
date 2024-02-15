@@ -7,7 +7,10 @@ export interface OrderRes {
     customer: CustomerRes;
     service: Service;
     filial: FilialRes;
+    urgency: string;
+    difficulty: string;
     receiveDate: string;
     returnDate: string;
     sum: number;
+    sbd: number;
 }
