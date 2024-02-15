@@ -13,6 +13,7 @@ CREATE TABLE `cleaner`.`customers` (
   `firstName` varchar(60) NOT NULL,
   `lastName` varchar(60) NOT NULL,
   `surName` varchar(60) NOT NULL,
+  `phoneNumber` varchar(60) NOT NULL,
   `isRepeatCustomer` tinyint(1) DEFAULT '0',
   `orderCount` int DEFAULT '0',
   PRIMARY KEY (`id`)

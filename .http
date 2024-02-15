@@ -26,7 +26,8 @@ content-type: application/json
 {
     "firstName": "Anton",
     "lastName": "Antonov",
-    "surName": "Opapa"
+    "surName": "Opapa",
+    "phoneNumber": "+380935637656"
 }
 
 ###

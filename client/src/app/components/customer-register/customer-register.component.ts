@@ -17,7 +17,8 @@ export class CustomerRegisterComponent {
   myForm = new FormGroup({
     "firstName": new FormControl("", Validators.required),
     "lastName": new FormControl("", Validators.required),
-    "surName": new FormControl("", Validators.required)
+    "surName": new FormControl("", Validators.required),
+    "phoneNumber": new FormControl("", Validators.required)
   });
   constructor(private customerService: CustomerService, private router: Router, private snackBar: MatSnackBar) { }
 

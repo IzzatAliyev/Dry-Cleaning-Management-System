@@ -7,6 +7,7 @@ export class CustomerResponseDto {
         this.firstName = customer.firstName;
         this.lastName = customer.lastName;
         this.surName = customer.surName;
+        this.phoneNumber = customer.phoneNumber;
         this.isRepeatCustomer = customer.isRepeatCustomer;
         this.orderCount = customer.orderCount;
     }
@@ -15,6 +16,7 @@ export class CustomerResponseDto {
     firstName: string;
     lastName: string;
     surName: string;
+    phoneNumber: string;
     isRepeatCustomer: boolean;
     orderCount: number;
 }

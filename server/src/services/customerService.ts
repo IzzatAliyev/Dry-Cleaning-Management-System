@@ -5,8 +5,8 @@ import { Customer } from "../models";
 export async function addCustomer(customer: CustomerRequestDto): Promise<string> {
     const conn = await connect();
     try {
-        const { firstName, lastName, surName } = customer;
-        const newCustomer = new Customer(firstName, lastName, surName, false, 0, 0);
+        const { firstName, lastName, surName, phoneNumber } = customer;
+        const newCustomer = new Customer(firstName, lastName, surName, phoneNumber, false, 0, 0);
         await conn.query(`INSERT INTO customers SET ?`, [newCustomer])
         return "Customer created";
     }
@@ -48,7 +48,7 @@ export async function findCustomerById(id: number): Promise<Customer> {
     }
     catch (err: any) {
         console.error(err.message)
-        return new Customer('', '', '', false, -1, -1);
+        return new Customer('', '', '', '', false, -1, -1);
     }
     finally {
         await conn.end()
@@ -65,7 +65,7 @@ export async function findCustomer(lastName: string): Promise<Customer> {
     }
     catch (err: any) {
         console.error(err.message)
-        return new Customer('', '', '', false, -1, -1);
+        return new Customer('', '', '', '', false, -1, -1);
     }
     finally {
         await conn.end()

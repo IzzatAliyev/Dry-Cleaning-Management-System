@@ -14,7 +14,7 @@
       <td>{{ order.customer.lastName + ' ' + order.customer.firstName + ' ' + order.customer.surName }}</td>
       <td>{{ order.filial.name + ', ' + order.filial.location }}</td>
       <td>{{ order.service.name }}</td>
-      <td>{{ order.sum }}</td>
+      <td>{{ order.sum.toFixed(2) }}</td>
       <td>{{ order.receiveDate }}</td>
       <td>{{ order.returnDate }}</td>
     </tr>

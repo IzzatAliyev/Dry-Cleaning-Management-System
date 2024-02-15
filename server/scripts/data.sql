@@ -1,29 +1,29 @@
 INSERT INTO `cleaner`.`filials` (name, location) VALUES
-('FreshClean Dry Cleaners', '123 Main Street, Cityville'),
-('EcoPress Cleaners', '456 Oak Avenue, Townsville'),
-('QuickSteam Laundry', '789 Elm Boulevard, Villageton'),
-('PureFabric Dry Cleaning', '101 Pine Lane, Hamletsville'),
-('CrystalClear Garment Care', '202 Maple Street, Suburbia');
+('Чиста Лінія Хімчистка', 'вул. Головна, Містечко'),
+('Еко Прес Чистка', 'вул. Дубова, Містечко'),
+('Швидка Пара Пральня', 'вул. Вільхова, Містечко'),
+('Чиста Тканина Хімчистка', 'вул. Соснова, Містечко'),
+('Кришталево Чистий Догляд за Одягом', 'вул. Кленова, Містечко');
 
 INSERT INTO `cleaner`.`serviceType` (name) VALUES
-('Dry Cleaning'),
-('Laundry'),
-('Alterations'),
-('Pressing');
+('Хімчистка'),
+('Пральня'),
+('Зміна'),
+('Прасування');
 
-INSERT INTO `cleaner`.`customers` (firstName, lastName, surName, isRepeatCustomer, orderCount) VALUES
-('John', 'Doe', 'Sr.', 0, 1),
-('Alice', 'Smith', 'Jr.', 0, 1),
-('Bob', 'Johnson', 'III', 0, 1),
-('Emily', 'Williams', ' ', 0, 1),
-('David', 'Jones', ' ', 0, 1);
+INSERT INTO `cleaner`.`customers` (firstName, lastName, surName, phoneNumber, isRepeatCustomer, orderCount) VALUES
+('Іван', 'Петров', 'Іванович', '0939493994', 1, 12),
+('Аліса', 'Сміт', 'Іванівна', '0735498694', 1, 12),
+('Богдан', 'Йогансон', 'Іванович', '0938393494', 1, 11),
+('Емілія', 'Вільямс', 'Петрович', '0979499934', 1, 11),
+('Давід', 'Джонс', 'Олегович', '0636493994', 1, 11);
 
 INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
-('Suit Dry Cleaning', 1, 25.99),
-('Dress Laundry', 2, 15.99),
-('Pants Alterations', 3, 10.50),
-('Shirt Pressing', 4, 5.99),
-('Coat Dry Cleaning', 1, 35.99);
+('Хімчистка костюма', 1, 25.99),
+('Прання сукні', 2, 15.99),
+('Штани ательє', 3, 10.50),
+('Прасування сорочки', 4, 5.99),
+('Хімчистка пальта', 1, 35.99);
 
 INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDate, returnDate) VALUES
 (1, 1, 2, 50.20, '2024-02-15', '2024-02-20'),
