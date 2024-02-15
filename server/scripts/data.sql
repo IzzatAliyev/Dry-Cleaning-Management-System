@@ -6,44 +6,74 @@ INSERT INTO `cleaner`.`filials` (name, location) VALUES
 ('Кришталево Чистий Догляд за Одягом', 'вул. Кленова, Містечко');
 
 INSERT INTO `cleaner`.`serviceType` (name) VALUES
-('Хімчистка'),
-('Пральня'),
-('Зміна'),
-('Прасування');
+('Чистка одягу'),
+('Фарбування одягу'),
+('Чищення та фарбування взуття'),
+('Чищення та фарбування шкіри'),
+('Хутряні вироби'),
+('Чистка домашнього текстилю'),
+('Premium чистка'),
+('Обробка озоном');
 
 INSERT INTO `cleaner`.`customers` (firstName, lastName, surName, phoneNumber, isRepeatCustomer, orderCount) VALUES
-('Іван', 'Петров', 'Іванович', '0939493994', 1, 12),
-('Аліса', 'Сміт', 'Іванівна', '0735498694', 1, 12),
-('Богдан', 'Йогансон', 'Іванович', '0938393494', 1, 11),
-('Емілія', 'Вільямс', 'Петрович', '0979499934', 1, 11),
-('Давід', 'Джонс', 'Олегович', '0636493994', 1, 11);
+('Іван', 'Петров', 'Іванович', '0939493994', 1, 11),
+('Аліса', 'Сміт', 'Іванівна', '0735498694', 1, 11),
+('Богдан', 'Йогансон', 'Іванович', '0938393494', 1, 10),
+('Емілія', 'Вільямс', 'Петрович', '0979499934', 1, 10),
+('Давід', 'Джонс', 'Олегович', '0636493994', 1, 10);
 
+-- Service Type: Чистка одягу (Dry Cleaning)
 INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
-('Хімчистка костюма', 1, 25.99),
-('Прання сукні', 2, 15.99),
-('Штани ательє', 3, 10.50),
-('Прасування сорочки', 4, 5.99),
-('Хімчистка пальта', 1, 35.99);
+('Чистка костюма', 1, 25.99),
+('Чистка сукні', 1, 30.99);
+
+-- Service Type: Фарбування одягу (Clothing Dyeing)
+INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
+('Фарбування сукні', 2, 35.99),
+('Фарбування костюма', 2, 40.99);
+
+-- Service Type: Чищення та фарбування взуття (Shoe Cleaning and Dyeing)
+INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
+('Чищення та фарбування чобіт', 3, 18.50),
+('Чищення та фарбування кросівок', 3, 12.99);
+
+-- Service Type: Чищення та фарбування шкіри (Leather Cleaning and Dyeing)
+INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
+('Чищення та фарбування шкіряної сумки', 4, 45.99),
+('Чищення та фарбування шкіряного пальта', 4, 55.99);
+
+-- Service Type: Хутряні вироби (Fur Services)
+INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
+('Чистка хутра', 5, 60.99),
+('Фарбування хутряного жакету', 5, 70.99);
+
+-- Service Type: Чистка домашнього текстилю (Home Textile Cleaning)
+INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
+('Чистка подушок', 6, 15.99),
+('Прасування рушників', 6, 8.99);
+
+-- Service Type: Premium чистка (Premium Cleaning)
+INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
+('Premium чистка костюма', 7, 50.99),
+('Premium чистка сукні', 7, 55.99);
+
+-- Service Type: Обробка озоном (Ozone Treatment)
+INSERT INTO `cleaner`.`services` (name, typeId, cost) VALUES
+('Обробка озоном куртки', 8, 20.99),
+('Обробка озоном штанів', 8, 12.99);
 
 INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDate, returnDate) VALUES
-(1, 1, 2, 50.20, '2024-02-15', '2024-02-20'),
-(2, 3, 3, 60.30, '2024-02-16', '2024-02-18'),
-(3, 2, 5, 39.50, '2024-02-17', '2024-02-22'),
-(4, 4, 1, 42.99, '2024-02-18', '2024-02-21'),
-(5, 5, 4, 65.30, '2024-02-19', '2024-02-24');
-
-INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDate, returnDate) VALUES
-(1, 1, 2, 50.20, '2022-01-02', '2024-01-20'),
-(2, 3, 3, 60.30, '2024-02-16', '2024-02-18');
+(1, 1, 2, 50.20, '2022-01-02', '2022-01-20'),
+(2, 3, 3, 60.30, '2022-02-16', '2022-02-18');
 
 -- February 2022
 INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDate, returnDate) VALUES
-(3, 2, 5, 39.50, '2024-02-17', '2024-02-22'),
-(4, 4, 1, 42.99, '2024-02-18', '2024-02-21');
+(3, 2, 5, 39.50, '2022-02-17', '2022-02-22'),
+(4, 4, 1, 42.99, '2022-02-18', '2022-02-21');
 
 -- March 2022
 INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDate, returnDate) VALUES
-(5, 5, 4, 65.30, '2024-02-19', '2024-02-24'),
+(5, 5, 4, 65.30, '2022-02-19', '2022-02-24'),
 (1, 1, 2, 55.40, '2022-03-05', '2022-03-10');
 
 -- April 2022
@@ -58,8 +88,8 @@ INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDat
 
 -- June 2022
 INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDate, returnDate) VALUES
-(1, 1, 2, 50.20, '2022-06-02', '2024-06-20'),
-(2, 3, 3, 60.30, '2024-06-16', '2024-06-18');
+(1, 1, 2, 50.20, '2022-06-02', '2022-06-20'),
+(2, 3, 3, 60.30, '2022-06-16', '2022-06-18');
 
 -- July 2022
 INSERT INTO `cleaner`.`orders` (customerId, serviceId, filialId, sum, receiveDate, returnDate) VALUES
