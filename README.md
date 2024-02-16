@@ -119,3 +119,10 @@ CREATE TABLE `cleaner`.`orders` (
   FOREIGN KEY (`filialId`) REFERENCES `filials`(`id`)
 );
 ```
+
+
+> remove volume and images 
+> `docker-compose down -v --rmi=all` 
+
+> remove volume and local images 
+> `docker-compose down -v --rmi=local` 
