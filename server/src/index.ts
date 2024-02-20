@@ -24,6 +24,7 @@ app.post('/orders', controllers.createOrder);
 app.patch('/orders/:id', controllers.updateOrder);
 app.get('/orders', controllers.getOrders);
 app.get('/orders/:id', controllers.getOrder);
+app.get('/orders/filial/:filialId', controllers.getOrdersByFilialId);
 app.get('/orders/sum/:year', controllers.getSum);
 app.get('/orders/month/:year', controllers.getSumAndMonth);
 app.get('/filials', controllers.getFilials);

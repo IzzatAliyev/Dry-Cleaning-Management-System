@@ -19,6 +19,10 @@ export class OrderService {
     return this.httpclient.get<OrderRes[]>(this.apiUrl);
   }
 
+  getOrdersByFilialId(filialId: number): Observable<OrderRes[]> {
+    return this.httpclient.get<OrderRes[]>(this.apiUrl + `/filial/${filialId}`);
+  }
+
   getOrder(id: number): Observable<OrderResUpd> {
     return this.httpclient.get<OrderResUpd>(this.apiUrl + `/${id}`);
   }

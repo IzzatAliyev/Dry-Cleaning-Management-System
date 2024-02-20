@@ -72,6 +72,22 @@ export async function getOrders(): Promise<Order[]> {
     }
 }
 
+export async function getOrdersByFilialId(filialId: number): Promise<Order[]> {
+    const conn = await connect();
+    try {
+        const orders = await conn.query("SELECT * FROM orders WHERE orders.filialId = ? ORDER BY receiveDate DESC", [filialId]);
+        console.log(orders[0])
+        return orders[0] as Order[];
+    }
+    catch (err: any) {
+        console.error(err.message)
+        return []
+    }
+    finally {
+        await conn.end()
+    }
+}
+
 export async function getOrder(id: number): Promise<Order> {
     const conn = await connect();
     try {

@@ -72,6 +72,11 @@ GET {{orders}}/100
 
 ###
 
+### Get order by filialId
+GET {{orders}}/filial/2
+
+###
+
 ### Get orders sum
 GET {{orders}}/sum/2022
 

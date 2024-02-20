@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FilialRes } from '../../models/FilialRes';
 import { FilialService } from '../../services/filial.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-filial',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './filial.component.html',
   styleUrl: './filial.component.scss'
 })

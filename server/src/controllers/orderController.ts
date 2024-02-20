@@ -62,6 +62,30 @@ export async function getOrders(req: Request, res: Response): Promise<void> {
     res.json(resOrders);
 }
 
+export async function getOrdersByFilialId(req: Request, res: Response): Promise<void> {
+    const filialId = Number(req.params['filialId']);
+    const orders = await services.getOrdersByFilialId(filialId);
+    const resOrders: OrderResponseDto[] = [];
+    for (const order of orders) {
+        const customer = await services.findCustomerById(order.customerId);
+        const customerRes = new CustomerResponseDto(customer);
+        const service = await services.findServiceById(order.serviceId);
+        const serviceRes = new ServiceResponseDto(service);
+        const filial = await services.findFilialById(order.filialId)
+        const filialRes = new FilialResponseDto(filial);
+        const resOrder = new OrderResponseDto(order);
+        resOrder.customer = customerRes;
+        resOrder.service = serviceRes;
+        resOrder.filial = filialRes;
+        resOrder.difficulty = getName(order.difficulty)
+        resOrder.urgency = getName(order.urgency)
+        resOrder.ordStatus = getStatusName(order.ordStatus)
+        resOrders.push(resOrder)
+    }
+
+    res.json(resOrders);
+}
+
 function getName(numValue: number): string {
     switch (numValue) {
         case 1:

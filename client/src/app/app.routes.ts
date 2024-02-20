@@ -8,6 +8,7 @@ import { OrderNewComponent } from './components/order-new/order-new.component';
 import { FilialComponent } from './components/filial/filial.component';
 import { OrderUpdateComponent } from './components/order-update/order-update.component';
 import { CustomerUpdateComponent } from './components/customer-update/customer-update.component';
+import { FilialOrdersComponent } from './components/filial-orders/filial-orders.component';
 
 export const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: "customers/upd/:id", component: CustomerUpdateComponent },
   { path: "orders", component: OrderListComponent },
   { path: "orders/:id", component: OrderNewComponent },
+  { path: "orders/filial/:filialId", component: FilialOrdersComponent },
   { path: "orders/upd/:id", component: OrderUpdateComponent, pathMatch: 'full' },
   { path: "filials", component: FilialComponent }
 ];
