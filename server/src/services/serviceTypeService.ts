@@ -6,7 +6,6 @@ export async function getServiceType(id: number): Promise<ServiceType> {
     try {
         const res = await conn.query("SELECT * FROM `serviceType` WHERE `serviceType`.id = ?", [id]);
         const serviceTypes = res[0] as ServiceType[]
-        console.log(serviceTypes)
         return serviceTypes[0];
     } catch (err: any) {
         console.error(err.message)
@@ -22,7 +21,6 @@ export async function getServiceTypes(): Promise<ServiceType[]> {
     try {
         const res = await conn.query("SELECT * FROM `serviceType`");
         const serviceTypes = res[0] as ServiceType[]
-        console.log(serviceTypes)
         return serviceTypes;
     } catch (err: any) {
         console.error(err.message)

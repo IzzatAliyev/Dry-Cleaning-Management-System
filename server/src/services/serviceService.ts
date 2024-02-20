@@ -21,7 +21,6 @@ export async function findServiceById(id: number): Promise<Service> {
     try {
         const res = await conn.query(`SELECT * FROM services WHERE id = ?`, [id])
         const services = res[0] as Service[]
-        console.log(services)
         return services[0];
     }
     catch (err: any) {

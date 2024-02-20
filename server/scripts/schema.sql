@@ -2,6 +2,23 @@ CREATE DATABASE IF NOT EXISTS cleaner;
 
 USE cleaner;
 
+DROP FUNCTION IF EXISTS autoInc;
+
+DELIMITER $$
+CREATE FUNCTION autoInc ()
+    RETURNS INT
+    READS SQL DATA
+    BEGIN
+        DECLARE getCount INT;
+
+        SELECT COUNT(*) + 1 INTO getCount
+        FROM orders;
+
+        RETURN getCount;
+    END$$
+DELIMITER ;
+
+
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS services;
@@ -49,7 +66,9 @@ CREATE TABLE `cleaner`.`orders` (
   `sum` float NOT NULL,
   `sbd` float NOT NULL,
   `urgency` int NOT NULL,
+  `ordNum` int NOT NULL,
   `difficulty` int NOT NULL,
+  `ordStatus` int NOT NULL,
   `receiveDate` varchar(60) NOT NULL,
   `returnDate` varchar(60) NOT NULL,
   PRIMARY KEY (`id`),

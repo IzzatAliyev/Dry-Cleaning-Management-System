@@ -6,6 +6,7 @@ import { CustomerRegisterComponent } from './components/customer-register/custom
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { OrderNewComponent } from './components/order-new/order-new.component';
 import { FilialComponent } from './components/filial/filial.component';
+import { OrderUpdateComponent } from './components/order-update/order-update.component';
 
 const customerRoutes: Routes = [
   { path: "register", component: CustomerRegisterComponent }
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: "customers", component: CustomerComponent },
   { path: "orders", component: OrderListComponent },
   { path: "orders/:id", component: OrderNewComponent },
+  { path: "orders/upd/:id", component: OrderUpdateComponent },
   { path: "filials", component: FilialComponent }
 ];

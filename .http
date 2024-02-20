@@ -32,6 +32,19 @@ content-type: application/json
 
 ###
 
+### Update Customer 
+PATCH {{customers}}/1
+content-type: application/json
+
+{
+    "firstName": "Anton",
+    "lastName": "Antonov",
+    "surName": "Opapa",
+    "phoneNumber": "+380935637656"
+}
+
+###
+
 ### Find Customer 
 GET {{customers}}?lastName=Doe
 
@@ -69,6 +82,23 @@ content-type: application/json
     "filialId": "3",
     "urgency": "3",
     "difficulty": "3",
+    "ordStatus": "2",
+    "receiveDate": "2024-02-20",
+    "returnDate": "2024-03-24"
+}
+
+###
+
+### Update order
+POST {{orders}}/100
+content-type: application/json
+
+{
+    "serviceId": "2",
+    "filialId": "3",
+    "urgency": "3",
+    "difficulty": "3",
+    "ordStatus": "2",
     "receiveDate": "2024-02-20",
     "returnDate": "2024-03-24"
 }

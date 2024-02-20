@@ -5,8 +5,15 @@ import { CustomerResponseDto } from '../dtos/CustomerResponseDto';
 
 export async function addCustomer(req: Request, res: Response): Promise<void> {
     const customerReq = req.body as CustomerRequestDto;
-    console.log(customerReq)
     const customer = await services.addCustomer(customerReq);
+
+    res.json(customer);
+}
+
+export async function updateCustomer(req: Request, res: Response): Promise<void> {
+    const customerReq = req.body as CustomerRequestDto;
+    const id = Number(req.params['id'])
+    const customer = await services.updateCustomerFull(id, customerReq);
 
     res.json(customer);
 }
@@ -24,6 +31,7 @@ export async function getCustomers(req: Request, res: Response): Promise<void> {
         findCustomer(req, res)
     }
     else {
+        console.log("IMher")
         const allCustomers = await services.getCustomers();
         const resCustomers: CustomerResponseDto[] = [];
         for (const customer of allCustomers) {

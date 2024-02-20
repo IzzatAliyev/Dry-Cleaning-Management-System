@@ -5,7 +5,6 @@ export async function getFilials(): Promise<Filial[]> {
     const conn = await connect();
     try {
         const filials = await conn.query("SELECT * FROM filials");
-        console.log(filials)
         return filials[0] as Filial[];
     }
     catch (err: any) {
@@ -22,7 +21,6 @@ export async function findFilialById(id: number): Promise<Filial> {
     try {
         const res = await conn.query(`SELECT * FROM filials WHERE id = ?`, [id])
         const filials = res[0] as Filial[]
-        console.log(filials)
         return filials[0];
     } catch (err: any) {
         console.error(err.message)

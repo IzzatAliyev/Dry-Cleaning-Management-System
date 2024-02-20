@@ -50,6 +50,23 @@ make additional payment for urgency and complexity of work
 
 И ещё нужно выводить прибыльность нашего предприятия, можно типо за месяц, или хз, какую-то диаграмму .
 
+
+1. Изменить валюту на грн +++DONE+++
+
+2. Сделать скидку фиксированой для постоянных 3% +++DONE+++
+
+5. Добавить в заказах поле номер заказа +++DONE+++
+
+7. В заказах добавить Новый столбец Статус заказа (Принят,В процессе,Готов к выдаче, Выдан) который тоже можно будет менять +++DONE+++
+
+4. Что бы от сложности и срочности цена менялась. Например Низкая сложность срочность +0 грн, высокая +50 грн +++DONE+++
+
+Вообще она ещё хотела крч что бы когда добавляешь заказ на человека, то можно было доавить сразу несколько усруг типо,  это это нужно менять очень дохуя +++DONE+++
+
+3. Сделать выбор сортировки  по выбору  в заказах ( не прям важно но желательно) 
+
+6. Редактировать заказы и клиентов
+
 ### Tables
 **customers**
 
@@ -110,7 +127,9 @@ CREATE TABLE `cleaner`.`orders` (
   `sum` float NOT NULL,
   `sbd` float NOT NULL,
   `urgency` int NOT NULL,
+  `ordNum` int NOT NULL,
   `difficulty` int NOT NULL,
+  `ordStatus` int NOT NULL,
   `receiveDate` varchar(60) NOT NULL,
   `returnDate` varchar(60) NOT NULL,
   PRIMARY KEY (`id`),
@@ -118,6 +137,22 @@ CREATE TABLE `cleaner`.`orders` (
   FOREIGN KEY (`serviceId`) REFERENCES `services`(`id`),
   FOREIGN KEY (`filialId`) REFERENCES `filials`(`id`)
 );
+```
+
+```
+DELIMITER $$
+CREATE FUNCTION autoInc ()
+    RETURNS INT
+    READS SQL DATA
+    BEGIN
+        DECLARE getCount INT;
+
+        SELECT COUNT(*) + 1 INTO getCount
+        FROM orders;
+
+        RETURN getCount;
+    END$$
+DELIMITER ;
 ```
 
 

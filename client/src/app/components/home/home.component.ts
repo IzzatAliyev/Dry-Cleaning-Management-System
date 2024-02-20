@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
         fill: 'origin',
       },
     ],
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    labels: ["Січень", "Лютий", "Березень", "Квітень", "Травень", "Червень", "Липень", "Серпень", "Вересень", "Жовтень", "Листопад", "Грудень"],
   };
 
   public lineChartOptions: ChartConfiguration['options'] = {
@@ -136,31 +136,7 @@ export class HomeComponent implements OnInit {
           color: 'red',
         },
       },
-    },
-
-    plugins: {
-      legend: { display: true },
-      annotation: {
-        annotations: [
-          {
-            type: 'line',
-            scaleID: 'x',
-            value: 'March',
-            borderColor: 'orange',
-            borderWidth: 2,
-            label: {
-              display: true,
-              position: 'center',
-              color: 'orange',
-              content: 'LineAnno',
-              font: {
-                weight: 'bold',
-              },
-            },
-          },
-        ],
-      },
-    },
+    }
   };
 
   public lineChartType: ChartType = 'line';

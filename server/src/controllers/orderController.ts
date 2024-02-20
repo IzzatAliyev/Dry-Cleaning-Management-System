@@ -13,10 +13,24 @@ export async function createOrder(req: Request, res: Response): Promise<void> {
     res.json(order);
 }
 
+export async function updateOrder(req: Request, res: Response): Promise<void> {
+    const orderReq = req.body as OrderRequestDto;
+    const id = Number(req.params['id'])
+    const order = await services.updateOrder(id, orderReq);
+
+    res.json(order);
+}
+
 export async function getSum(req: Request, res: Response): Promise<void> {
     const year = req.params['year']
     const sum = await services.getSum(year)
     res.json(sum)
+}
+
+export async function getOrder(req: Request, res: Response): Promise<void> {
+    const id = Number(req.params['id'])
+    const order = await services.getOrder(id)
+    res.json(order)
 }
 
 export async function getSumAndMonth(req: Request, res: Response): Promise<void> {
@@ -41,6 +55,7 @@ export async function getOrders(req: Request, res: Response): Promise<void> {
         resOrder.filial = filialRes;
         resOrder.difficulty = getName(order.difficulty)
         resOrder.urgency = getName(order.urgency)
+        resOrder.ordStatus = getStatusName(order.ordStatus)
         resOrders.push(resOrder)
     }
 
@@ -59,6 +74,22 @@ function getName(numValue: number): string {
             return "Середньо-високий";
         case 5:
             return "Високий";
+        default:
+            return "Невідомо";
+    }
+}
+
+function getStatusName(numValue: number): string {
+    numValue = Math.round(numValue);
+    switch (numValue) {
+        case 1:
+            return "Прийнято";
+        case 2:
+            return "В процесі";
+        case 3:
+            return "Готовий до видачі";
+        case 4:
+            return "Видано";
         default:
             return "Невідомо";
     }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OrderService } from '../../services/order.service';
 import { OrderReq } from '../../models/OrderReq';
 import { CommonModule } from '@angular/common';
@@ -28,38 +28,70 @@ export class OrderNewComponent implements OnInit {
     new OrderDiffAndUrg(3, 'Середній'),
     new OrderDiffAndUrg(4, 'Середньо-високий'),
     new OrderDiffAndUrg(5, 'Високий')]
-  myForm = new FormGroup({
-    "customerId": new FormControl(this.customerId, [Validators.required, Validators.pattern(/^\d+$/)]),
-    "serviceId": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
-    "filialId": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
-    "urgency": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
-    "difficulty": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
-    "receiveDate": new FormControl('', Validators.required),
-    "returnDate": new FormControl('', Validators.required)
-  });
+  statuses: OrderDiffAndUrg[] = [
+    new OrderDiffAndUrg(1, 'Прийнято'),
+    new OrderDiffAndUrg(2, 'В процесі'),
+    new OrderDiffAndUrg(3, 'Готовий до видачі'),
+    new OrderDiffAndUrg(4, 'Видано')]
+  formArray: FormGroup[] = [];
 
-  constructor(private orderService: OrderService, private serviceService: ServiceService, private filialService: FilialService, private activatedRoute: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private orderService: OrderService, private serviceService: ServiceService, private filialService: FilialService, private activatedRoute: ActivatedRoute, private router: Router, private snackBar: MatSnackBar, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.customerId = this.activatedRoute.snapshot.params['id'];
-    this.myForm.controls['customerId'].setValue(this.customerId);
     this.serviceService.getServices().subscribe(data => this.services = data);
     this.filialService.getFilials().subscribe(data => this.filials = data);
+    this.addForm();
+  }
+
+  addForm() {
+    const newForm = this.formBuilder.group({
+      "customerId": new FormControl(this.customerId, [Validators.required, Validators.pattern(/^\d+$/)]),
+      "serviceId": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+      "filialId": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+      "urgency": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+      "difficulty": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+      "ordStatus": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
+      "receiveDate": new FormControl('', Validators.required),
+      "returnDate": new FormControl('', Validators.required)
+    });
+
+    this.formArray.push(newForm);
+  }
+
+  duplicateForm(index: number) {
+    console.log(index)
+    const formToDuplicate = this.formArray[index];
+    const newForm = this.formBuilder.group(formToDuplicate.value);
+    this.formArray.splice(index + 1, 0, newForm);
+  }
+
+  deleteForm(index: number) {
+    this.formArray.splice(index, 1);
+  }
+
+  setCustomerIdForForms() {
+    this.formArray.forEach(form => {
+      form.controls['customerId'].setValue(this.customerId);
+    });
   }
 
   submit() {
-    var body = this.myForm.value as OrderReq;
-    this.orderService.addOrder(body).subscribe(
-      (response: string) => {
-        console.log('Request successful', response);
-        this.router.navigateByUrl('orders')
-        this.alertSuccess();
-      },
-      (error) => {
-        console.error('Error submitting request', error);
-        this.handleError();
-      }
-    );;
+    this.setCustomerIdForForms();
+    this.formArray.forEach(form => {
+      var body = form.value as OrderReq;
+      this.orderService.addOrder(body).subscribe(
+        (response: string) => {
+          console.log('Request successful', response);
+          this.router.navigateByUrl('orders')
+          this.alertSuccess();
+        },
+        (error) => {
+          console.error('Error submitting request', error);
+          this.handleError();
+        }
+      );
+    })
   }
 
   alertSuccess() {

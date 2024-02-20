@@ -8,7 +8,9 @@ export interface OrderRes {
     service: Service;
     filial: FilialRes;
     urgency: string;
+    ordNum: number;
     difficulty: string;
+    ordStatus: string;
     receiveDate: string;
     returnDate: string;
     sum: number;

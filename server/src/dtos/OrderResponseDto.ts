@@ -11,6 +11,7 @@ export class OrderResponseDto {
         this.returnDate = order.returnDate;
         this.sum = order.sum!;
         this.sbd = order.sbd!;
+        this.ordNum = order.ordNum!;
     }
 
     id: number;
@@ -18,7 +19,9 @@ export class OrderResponseDto {
     service?: ServiceResponseDto;
     filial?: FilialResponseDto;
     urgency?: string;
+    ordNum: number;
     difficulty?: string;
+    ordStatus?: string;
     receiveDate: string;
     returnDate: string;
     sum: number;

@@ -4,6 +4,7 @@ export interface OrderRequestDto {
     filialId: number,
     urgency: number,
     difficulty: number,
+    ordStatus: number,
     receiveDate: string,
     returnDate: string,
 }

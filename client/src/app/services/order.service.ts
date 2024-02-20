@@ -18,6 +18,10 @@ export class OrderService {
     return this.httpclient.get<OrderRes[]>(this.apiUrl);
   }
 
+  getOrder(id: number): Observable<OrderRes> {
+    return this.httpclient.get<OrderRes>(`${this.apiUrl}/${id}`);
+  }
+
   getSum(year: string): Observable<number> {
     return this.httpclient.get<number>(this.apiUrl + `/sum/${year}`);
   }

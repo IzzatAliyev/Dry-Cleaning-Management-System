@@ -16,10 +16,13 @@ app.use(bodyParser.json());
 // Define routes
 app.get('/', (req,res) => res.send("<h1>Welcome to the Dry Cleaning Management System</h1>"));
 app.post('/customers', controllers.addCustomer);
+app.patch('/customers/:id', controllers.updateCustomer);
 app.get('/customers', controllers.getCustomers);
 app.get('/services', controllers.getServices);
 app.post('/orders', controllers.createOrder);
+app.post('/orders/:id', controllers.updateOrder);
 app.get('/orders', controllers.getOrders);
+app.get('/orders/:id', controllers.getOrder);
 app.get('/orders/sum/:year', controllers.getSum);
 app.get('/orders/month/:year', controllers.getSumAndMonth);
 app.get('/filials', controllers.getFilials);
