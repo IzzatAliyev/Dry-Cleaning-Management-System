@@ -26,6 +26,14 @@ async function findCustomer(req: Request, res: Response): Promise<void> {
     res.json(resCustomer);
 }
 
+export async function getCustomer(req: Request, res: Response): Promise<void> {
+    const id = Number(req.params['id']);
+    const customer = await services.findCustomerById(id);
+    const resCustomer = new CustomerResponseDto(customer);
+
+    res.json(resCustomer);
+}
+
 export async function getCustomers(req: Request, res: Response): Promise<void> {
     if (req.query['lastName']) {
         findCustomer(req, res)

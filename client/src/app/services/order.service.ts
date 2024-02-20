@@ -5,6 +5,7 @@ import { OrderRes } from '../models/OrderRes';
 import { Observable, catchError, map } from 'rxjs';
 import { OrderReq } from '../models/OrderReq';
 import { OrderSum } from '../models/OrderSum';
+import { OrderResUpd } from '../models/OrderResUpd';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class OrderService {
     return this.httpclient.get<OrderRes[]>(this.apiUrl);
   }
 
-  getOrder(id: number): Observable<OrderRes> {
-    return this.httpclient.get<OrderRes>(`${this.apiUrl}/${id}`);
+  getOrder(id: number): Observable<OrderResUpd> {
+    return this.httpclient.get<OrderResUpd>(this.apiUrl + `/${id}`);
   }
 
   getSum(year: string): Observable<number> {
@@ -33,6 +34,33 @@ export class OrderService {
   addOrder(orderReq: OrderReq): Observable<string> {
     console.log(orderReq)
     return this.httpclient.post<OrderReq>(this.apiUrl, orderReq).pipe(
+      map((res: any) => {
+        return res
+      }),
+      catchError(error => {
+        let data = {};
+        if (error.error == null && error.status == 403) {
+          data = {
+            error: "",
+            message: 'you have not permission for this operation',
+            status: error.status
+          };
+        } else {
+          data = {
+            error: error.error.error,
+            message: error.error.message,
+            status: error.status
+          };
+        }
+        // @ts-ignore
+        throw this.errorDialogService.openDialog(data);
+      })
+    );
+  }
+
+  updateOrder(id:number, orderReq: OrderReq): Observable<string> {
+    console.log(orderReq)
+    return this.httpclient.patch<OrderReq>(`${this.apiUrl}/${id}`, orderReq).pipe(
       map((res: any) => {
         return res
       }),

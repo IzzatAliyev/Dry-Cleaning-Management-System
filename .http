@@ -50,6 +50,11 @@ GET {{customers}}?lastName=Doe
 
 ###
 
+### Get Customer 
+GET {{customers}}/5
+
+###
+
 ### Get Customers
 GET {{customers}}
 
@@ -59,6 +64,11 @@ GET {{customers}}
 
 ### Get orders
 GET {{orders}}
+
+###
+
+### Get order
+GET {{orders}}/100
 
 ###
 

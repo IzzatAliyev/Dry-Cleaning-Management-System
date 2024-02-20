@@ -11,6 +11,8 @@ import { FilialService } from '../../services/filial.service';
 import { ServiceService } from '../../services/service.service';
 import { OrderRes } from '../../models/OrderRes';
 import { OrderDiffAndUrg } from '../../models/OrderDiffAndUrg';
+import { Observable } from 'rxjs';
+import { OrderResUpd } from '../../models/OrderResUpd';
 
 @Component({
   selector: 'app-order-update',
@@ -21,7 +23,7 @@ import { OrderDiffAndUrg } from '../../models/OrderDiffAndUrg';
 })
 export class OrderUpdateComponent implements OnInit {
   orderId: number = 0
-  oldOrder: OrderRes | undefined;
+  oldOrder!: OrderResUpd;
   services: Service[] = []
   filials: FilialRes[] = []
   difficultyOrUrgency: OrderDiffAndUrg[] = [
@@ -36,38 +38,6 @@ export class OrderUpdateComponent implements OnInit {
     new OrderDiffAndUrg(3, 'Готовий до видачі'),
     new OrderDiffAndUrg(4, 'Видано')]
 
-  constructor(private orderService: OrderService, private serviceService: ServiceService, private filialService: FilialService, private activatedRoute: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) { }
-
-  ngOnInit(): void {
-    this.orderId = this.activatedRoute.snapshot.params['id'];
-    this.orderService.getOrder(this.orderId).subscribe(data => {
-      this.oldOrder = data;
-      this.myForm.patchValue({
-        "serviceId": this.oldOrder.service.id,
-        "filialId": this.oldOrder.filial.id,
-        "urgency": this.findDifficultyAndUrgencyNumber(this.oldOrder.urgency),
-        "difficulty": this.findDifficultyAndUrgencyNumber(this.oldOrder.difficulty),
-        "ordStatus": this.findStatusNumber(this.oldOrder.ordStatus),
-        "receiveDate": this.oldOrder.receiveDate,
-        "returnDate": this.oldOrder.returnDate
-      });
-    });
-    this.serviceService.getServices().subscribe(data => this.services = data);
-    this.filialService.getFilials().subscribe(data => this.filials = data);
-  }
-
-  findStatusNumber(searchString: string): number | null {
-    const foundStatus = this.statuses.find(status => status.value === searchString);
-
-    return foundStatus ? foundStatus.id : null;
-  }
-
-  findDifficultyAndUrgencyNumber(searchString: string): number | null {
-    const foundStatus = this.difficultyOrUrgency.find(status => status.value === searchString);
-
-    return foundStatus ? foundStatus.id : null;
-  }
-
   myForm = new FormGroup({
     "serviceId": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
     "filialId": new FormControl(0, [Validators.required, Validators.pattern(/^\d+$/)]),
@@ -78,9 +48,28 @@ export class OrderUpdateComponent implements OnInit {
     "returnDate": new FormControl('', Validators.required)
   })
 
+  constructor(private orderService: OrderService, private serviceService: ServiceService, private filialService: FilialService, private activatedRoute: ActivatedRoute, private router: Router, private snackBar: MatSnackBar) {}
+
+  ngOnInit(): void {
+    this.orderId = this.activatedRoute.snapshot.params['id'];
+    this.orderService.getOrder(this.orderId).subscribe(data => {
+      this.myForm.setValue({
+        "serviceId": data.serviceId,
+        "filialId": data.filialId,
+        "urgency": data.urgency,
+        "difficulty": data.difficulty,
+        "ordStatus": data.ordStatus,
+        "receiveDate": data.receiveDate,
+        "returnDate": data.returnDate
+      });
+    });
+    this.serviceService.getServices().subscribe(data => this.services = data);
+    this.filialService.getFilials().subscribe(data => this.filials = data);
+  }
+
   submit() {
     var body = this.myForm.value as OrderReq;
-    this.orderService.addOrder(body).subscribe(
+    this.orderService.updateOrder(this.orderId, body).subscribe(
       (response: string) => {
         console.log('Request successful', response);
         this.router.navigateByUrl('orders')
