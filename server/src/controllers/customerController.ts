@@ -39,7 +39,6 @@ export async function getCustomers(req: Request, res: Response): Promise<void> {
         findCustomer(req, res)
     }
     else {
-        console.log("IMher")
         const allCustomers = await services.getCustomers();
         const resCustomers: CustomerResponseDto[] = [];
         for (const customer of allCustomers) {

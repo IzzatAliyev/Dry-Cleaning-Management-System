@@ -14,7 +14,6 @@ export class CustomerService{
   constructor(private httpclient: HttpClient) { }
 
   addCustomer(customerReq: CustomerReq): Observable<string> {
-    console.log(customerReq)
     return this.httpclient.post<CustomerReq>(this.apiUrl, customerReq).pipe(
       map((res: any) => {
         return res
@@ -41,7 +40,6 @@ export class CustomerService{
   }
 
   updateCustomer(id: number, updCustomer: CustomerReq): Observable<string> {
-    console.log(updCustomer)
     return this.httpclient.patch<CustomerReq>(this.apiUrl + `/${id}`, updCustomer).pipe(
       map((res: any) => {
         return res

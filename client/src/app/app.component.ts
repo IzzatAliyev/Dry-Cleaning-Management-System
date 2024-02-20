@@ -14,21 +14,13 @@ import { CustomerRegisterComponent } from './components/customer-register/custom
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit, OnChanges, OnDestroy {
-  constructor(){ console.log("constructor"); }
+  constructor() { }
 
   ngOnInit(): void {
-    console.log('ngoninit')
   }
   ngOnChanges(changes: SimpleChanges): void {
-    for (let change in changes)
-    {
-      let cur = changes[change]
-      console.log(cur.currentValue)
-    }
-    console.log('ngonchanges')
   }
 
   ngOnDestroy(): void {
-    console.log('ngondestroy')
   }
 }

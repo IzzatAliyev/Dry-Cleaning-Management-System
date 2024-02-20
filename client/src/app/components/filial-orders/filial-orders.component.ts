@@ -20,7 +20,6 @@ export class FilialOrdersComponent implements OnInit {
     this.filialId = this.activatedRoute.snapshot.params['filialId'];
     this.orderService.getOrdersByFilialId(this.filialId).subscribe(orders => {
       if (Array.isArray(orders)) {
-        console.log(orders);
         this.orders= orders;
       } else {
         console.error('Unexpected data format:', orders);

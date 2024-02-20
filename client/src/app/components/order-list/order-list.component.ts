@@ -18,7 +18,6 @@ export class OrderListComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.getOrders().subscribe(orders => {
       if (Array.isArray(orders)) {
-        console.log(orders);
         this.orders= orders;
       } else {
         console.error('Unexpected data format:', orders);

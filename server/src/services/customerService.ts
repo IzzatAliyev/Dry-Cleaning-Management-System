@@ -110,7 +110,6 @@ export async function getCustomers(): Promise<Customer[]> {
     const conn = await connect();
     try {
         const customers = await conn.query("SELECT `customers`.id, `customers`.firstName, `customers`.lastName, `customers`.surName, `customers`.phoneNumber, CASE WHEN orderCount >= 2 THEN 1 ELSE 0 END AS isRepeatCustomer, COUNT(`orders`.id) as orderCount FROM `cleaner`.`customers` LEFT JOIN `cleaner`.`orders` ON `orders`.customerId = `customers`.id GROUP BY `customers`.id, `customers`.firstName, `customers`.lastName, `customers`.surName, `customers`.phoneNumber, `customers`.isRepeatCustomer;");
-        console.log(customers)
         return customers[0] as Customer[];
     }
     catch (err: any) {

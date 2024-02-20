@@ -151,7 +151,6 @@ export class HomeComponent implements OnInit {
     event?: ChartEvent;
     active?: object[];
   }): void {
-    console.log(event, active);
   }
 
   public chartHovered({
@@ -161,7 +160,6 @@ export class HomeComponent implements OnInit {
     event?: ChartEvent;
     active?: object[];
   }): void {
-    console.log(event, active);
   }
 
   public showCurrentYear(): void {

@@ -76,7 +76,6 @@ export async function getOrdersByFilialId(filialId: number): Promise<Order[]> {
     const conn = await connect();
     try {
         const orders = await conn.query("SELECT * FROM orders WHERE orders.filialId = ? ORDER BY receiveDate DESC", [filialId]);
-        console.log(orders[0])
         return orders[0] as Order[];
     }
     catch (err: any) {
@@ -147,7 +146,6 @@ function checkDifficultyOrUrgency(numValue: number, sum: number): number {
         case 5:
             return sum + 50;
         default:
-            console.log("im here")
             return sum;
     }
 }

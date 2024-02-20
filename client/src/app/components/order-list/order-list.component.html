@@ -17,7 +17,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let order of orders">
-      <td>{{ order.ordNum }}</td>
+      <td>{{ order.id }}</td>
       <td>{{ order.customer.lastName + ' ' + order.customer.firstName + ' ' + order.customer.surName }}</td>
       <td>{{ order.filial.name + ', ' + order.filial.location }}</td>
       <td>{{ order.service.name }}</td>

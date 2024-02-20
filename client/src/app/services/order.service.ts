@@ -36,7 +36,6 @@ export class OrderService {
   }
 
   addOrder(orderReq: OrderReq): Observable<string> {
-    console.log(orderReq)
     return this.httpclient.post<OrderReq>(this.apiUrl, orderReq).pipe(
       map((res: any) => {
         return res
@@ -63,7 +62,6 @@ export class OrderService {
   }
 
   updateOrder(id:number, orderReq: OrderReq): Observable<string> {
-    console.log(orderReq)
     return this.httpclient.patch<OrderReq>(`${this.apiUrl}/${id}`, orderReq).pipe(
       map((res: any) => {
         return res

@@ -60,7 +60,6 @@ export class OrderNewComponent implements OnInit {
   }
 
   duplicateForm(index: number) {
-    console.log(index)
     const formToDuplicate = this.formArray[index];
     const newForm = this.formBuilder.group(formToDuplicate.value);
     this.formArray.splice(index + 1, 0, newForm);

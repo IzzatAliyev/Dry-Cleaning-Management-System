@@ -18,7 +18,6 @@ export class ServiceComponent implements OnInit {
   ngOnInit(): void {
     this.service.getServices().subscribe(services => {
       if (Array.isArray(services)) {
-        console.log(services);
         this.services = services;
       } else {
         console.error('Unexpected data format:', services);
